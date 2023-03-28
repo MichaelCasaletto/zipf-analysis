@@ -2,9 +2,18 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import argparse
 
+parser = argparse.ArgumentParser(description="Plot word counts")
+parser.add_argument('infile', type=argparse.FileType('r'),
+                    nargs='?', default='-',
+                       help='Word count csv file name')
+parser.add_argument('--xlim', type=float, nargs=2,
+                    metavar=('XMIN', 'XMAX'),
+                    default=None, help='X-axis limits')
+args = parser.parse_args()
 
-df = pd.read_csv('results/frankenstein.csv', header=None,
+df = pd.read_csv(args.infile, header=None,
                  names=('word', 'word_frequency'))
 df['rank'] = df['word_frequency'].rank(ascending=False,
                                        method='max')
@@ -13,5 +22,5 @@ ax = df.plot.scatter(x='word_frequency',
                      y='inverse_rank',
                      figsize=[12, 6],
                      grid=True,
-                     xlim=None)
+                     xlim=args.xlim)
 plt.show()
