@@ -13,7 +13,8 @@ To reproduce the figures in the publication, follow these steps:
 
 2. Use `countwords.py` to count the words in `frankenstein.txt`.
 
-      python bin/countwords.py > results/frankenstein.csv
+      python bin/countwords.py data/frankenstein.txt --num 100  > 
+results/frankenstein.csv
 
 3. Use `plotcounts.py` to plot the resulting file.
 
